@@ -5,18 +5,18 @@ Before everything, the following stuffs are only tested on a 32-bit 2GB memory w
 ### Overall 
 The APIs contains the following endpoints and parameters
 * /login
-* /web/admin/create
-* /web/admin/update
-* /web/admin/delete
+* /web/admin/create?isAdmin={true/false} -d "{User Profile instance}"
+* /web/admin/update?id={id} -d "{User Profile instance}"
+* /web/admin/delete/{id}
 * /web/admin/query/{id}
-* /web/admin/grant/{id}
+* /web/admin/grant?id={id}&isAdmin={true/false}
 * /web/user/query
 * /web/user/delete
-* /app/admin/v1/create
-* /app/admin/v1/update
-* /app/admin/v1/delete
+* /app/admin/v1/create?isAdmin={true/false} -d "{User Profile instance}"
+* /app/admin/v1/update?id={id} -d "{User Profile instance}"
+* /app/admin/v1/delete/{id}
 * /app/admin/v1/query/{id}
-* /app/admin/v1/grant/{id}
+* /app/admin/v1/grant?id={id}&isAdmin={true/false}
 * /app/user/v1/query
 * /app/user/v1/grant
 
