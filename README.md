@@ -3,8 +3,12 @@ Before everything, the following stuffs are only tested on a 32-bit 2GB memory w
 * babyinair@hotmail.com
 
 ### Overall 
-Structure:
 ![image](https://github.com/luliangLi/accentureCodeTest/blob/master/Design1.png)
+
+- From the chart we can find I isolated the web/app APIs for the following reasons:
+* For some senarios, app may require different http info from the request comparing against web channel APIs, e.g. deviceId for app and cookie for web.
+* Normally app APIs need a version control because of various app client version.
+* Performance, sometimes the data size transfered by app and web are different.
 
 The APIs contains the following endpoints and parameters
 * /login
