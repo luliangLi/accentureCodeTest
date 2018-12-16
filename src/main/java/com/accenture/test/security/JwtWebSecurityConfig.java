@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpMethod;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,13 +18,16 @@ import com.accenture.test.domain.Permission;
 import com.accenture.test.repository.UserH2Repository;
 
 @Configuration
-@Order(SecurityProperties.BASIC_AUTH_ORDER)
+@Order(SecurityProperties.IGNORED_ORDER)
 public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsServiceImpl userDetailsServiceImpl;
 	
 	@Autowired
 	private UserH2Repository userRepo;
+	
+	@Autowired
+	private Environment env;
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -51,17 +54,15 @@ public class JwtWebSecurityConfig extends WebSecurityConfigurerAdapter {
     
     private void insertAdminUser() {
         AccentureUser admin = new AccentureUser();
-        admin.setPassword(bCryptPasswordEncoder.encode("123456"));
+        admin.setPassword(bCryptPasswordEncoder.encode(env.getProperty("accenture.user.ps")));
         admin.setPermission(Permission.ADMIN.ordinal());
-        admin.setUsername("admin");
-        
+        admin.setUsername(env.getProperty("accenture.user.admin"));
         userRepo.save(admin);
         
         AccentureUser user = new AccentureUser();
-        user.setPassword(bCryptPasswordEncoder.encode("123456"));
+        user.setPassword(bCryptPasswordEncoder.encode(env.getProperty("accenture.user.ps")));
         user.setPermission(Permission.USER.ordinal());
-        user.setUsername("user");
-        
+        user.setUsername(env.getProperty("accenture.user.user"));
         userRepo.save(user);
         
         List<AccentureUser> users = userRepo.findAll();

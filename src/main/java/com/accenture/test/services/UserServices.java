@@ -1,6 +1,7 @@
 package com.accenture.test.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,10 @@ import com.accenture.test.vo.ResultVo;
 
 @Service
 public class UserServices {
-//
-//	@Autowired
-//	private UserRepository userRepository;
-//	
+
+	@Autowired
+	private Environment env;
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -49,7 +50,7 @@ public class UserServices {
 		AccentureUser user = new AccentureUser();
 		user.setUp(userProfile);
 		user.setPermission(isAdmin ? Permission.ADMIN.ordinal() : Permission.USER.ordinal());
-		user.setPassword(bCryptPasswordEncoder.encode("123456"));
+		user.setPassword(bCryptPasswordEncoder.encode(env.getProperty("accenture.user.ps")));
 		
 		AccentureUser u = userH2Repository.save(user);
         

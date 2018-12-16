@@ -18,8 +18,6 @@ import com.accenture.test.domain.Permission;
 import com.accenture.test.repository.UserH2Repository;
 import com.accenture.test.utils.Utilies;
 
-import io.jsonwebtoken.Jwts;
-
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
 	private UserH2Repository userRepo;
@@ -47,7 +45,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String user = Utilies.getUserFromReq(request);
-		
+
 		if (user != null) {
 			AccentureUser userEntity = userRepo.findById(Long.valueOf(user)).get();
 			Integer p = userEntity.getPermission();

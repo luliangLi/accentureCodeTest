@@ -3,6 +3,9 @@ Before everything, the following stuffs are only tested on a 32-bit 2GB memory w
 * babyinair@hotmail.com
 
 ### Overall 
+Structure:
+![image](http://github.com/luliangLi/accentureCodeTest/raw/master/Design.png)
+
 The APIs contains the following endpoints and parameters
 * /login
 * /web/admin/create?isAdmin={true/false} -d "{User Profile instance}"

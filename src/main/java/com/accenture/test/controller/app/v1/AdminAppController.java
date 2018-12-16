@@ -13,13 +13,16 @@ import com.accenture.test.domain.UserProfile;
 import com.accenture.test.services.UserServices;
 import com.accenture.test.vo.ResultVo;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController 
 @RequestMapping(value="/app/admin/v1")
 public class AdminAppController {
 
 	@Autowired
 	private UserServices userServices;
-	
+
+	@ApiOperation(value="Create User", notes="Only admin role can access the api to create a new user")
 	@RequestMapping(value="/create", method = RequestMethod.POST, consumes = "application/json") 
     public ResultVo<AccentureUser> createUserProfile(
     		@RequestParam(value = "isAdmin", required = false, defaultValue = "false") boolean isAdmin, 
@@ -29,6 +32,7 @@ public class AdminAppController {
         return rlt;
     }
 	
+	@ApiOperation(value="Update User", notes="Only admin role can access the api to update user profile")
 	@RequestMapping(value="/update", method = RequestMethod.POST, consumes = "application/json") 
     public ResultVo<AccentureUser> updateUserProfile(
     		@RequestBody(required=false) UserProfile userProfile,
@@ -38,6 +42,7 @@ public class AdminAppController {
         return rlt;
     } 
 	
+	@ApiOperation(value="Grant role to user", notes="Only admin role can access the api to grant different role to the user")
 	@RequestMapping(value="/grant", method=RequestMethod.GET) 
 	public ResultVo<AccentureUser> changePermission(
     		@RequestParam(value = "isAdmin") boolean isAdmin,
@@ -47,6 +52,7 @@ public class AdminAppController {
         return rlt;
     } 
 	
+	@ApiOperation(value="Query User", notes="Only admin role can access the api to query specific user information")
 	@RequestMapping(value="/query/{id}", method=RequestMethod.GET) 
     public ResultVo<AccentureUser> getUserProfile(@PathVariable String id) { 
         ResultVo<AccentureUser> rlt = userServices.getUserProfile(id);
@@ -54,6 +60,7 @@ public class AdminAppController {
         return rlt;
     }
 	
+	@ApiOperation(value="Delete User", notes="Only admin role can access the api to delete the specific user")
 	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET) 
     public ResultVo<AccentureUser> deleteUserProfile(@PathVariable String id) { 
         ResultVo<AccentureUser> rlt = userServices.deleteUserProfile(id);
