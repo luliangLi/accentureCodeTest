@@ -4,7 +4,7 @@ Before everything, the following stuffs are only tested on a 32-bit 2GB memory w
 
 ### Overall 
 Structure:
-![image](http://github.com/luliangLi/accentureCodeTest/raw/master/Design1.png)
+![image](https://github.com/luliangLi/accentureCodeTest/blob/master/Design1.png)
 
 The APIs contains the following endpoints and parameters
 * /login
